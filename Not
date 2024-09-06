@@ -1,0 +1,13 @@
+1.oyuncu-VerticalPlayerLeft;
+Bu oyun iki kişilik olacak.edit>project settings>Vertical kısmında İnputName ismini VerticalPlayerLeft ver.Ve soldaki oyuncu yukarı için w,s yi kullanacak.Sagdaki oyuncuda up ve down tuşlarını kullanacagi için burda up ve down tuşlarını sil.Kaydet.
+
+2.Oyuncu-VerticalPlayerRight;
+VerticalPlayerLeft üstüne gel sag tıkla Duplicate array Elemet.Kopaladık
+
+edit>project settings>Vertical kısmında İnputName ismini VerticalPlayerRight ver.Ve sagdaki oyuncu yukarı için up,down yi kullanacak.
+------------------------------------------
+3)Oyuncu eger yukarı hareket ediyorsa topa yukarı dogru,Aşagı dogru hareket ediyorsa aşagı dogru moment versin.
+4.Oyuncu hareket etmiyorsa topun y eksenindeki hızını Player'ın y eksenindeki hızına eşitlendiginde topun y eksenindeki hizi 0 olacagı için top yavaşlayacak.Bunu istemedigim için ayrı bir if açıp eger velocityY'si 0 a eşit degilse bunu yap dedim.
+5.Topun yavaşlamasını istemiyorum.Sabit bir hız degerinde tutacagım.
+
+
