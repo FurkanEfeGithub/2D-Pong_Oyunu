@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerLeft : MonoBehaviour
 {
-    Rigidbody2D rb2D;
+    Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
-        rb2D=GetComponent<Rigidbody2D>();
+        rb=GetComponent<Rigidbody2D>();
     }
     // Update is called once per frame
     void Update()
@@ -17,7 +17,7 @@ public class PlayerLeft : MonoBehaviour
     }
     void PlayeriYukariAsagiHareketi()
     {
-        rb2D.velocity=new Vector2(0,
+        rb.velocity=new Vector2(0,
         Input.GetAxis("VerticalPlayerLeft")* 10f);
     }
 
