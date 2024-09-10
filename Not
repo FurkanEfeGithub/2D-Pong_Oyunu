@@ -9,5 +9,35 @@ edit>project settings>Vertical kısmında İnputName ismini VerticalPlayerRight 
 3)Oyuncu eger yukarı hareket ediyorsa topa yukarı dogru,Aşagı dogru hareket ediyorsa aşagı dogru moment versin.
 4.Oyuncu hareket etmiyorsa topun y eksenindeki hızını Player'ın y eksenindeki hızına eşitlendiginde topun y eksenindeki hizi 0 olacagı için top yavaşlayacak.Bunu istemedigim için ayrı bir if açıp eger velocityY'si 0 a eşit degilse bunu yap dedim.
 5.Topun yavaşlamasını istemiyorum.Sabit bir hız degerinde tutacagım.
+----------------------------
+Kodun en saf hali bu:
+    void OnCollisionEnter2D(Collision2D temas)
+    {
+        if(temas.gameObject.tag=="Player")
+        {
+            rb.velocity=new Vector2(rb.velocity.x,
+            temas.gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        }
+    }
+------------------------------
+Ball.cs Console Hatası-1:
+Tag Kontrolü: == yerine = kullanmışsınız. = atama işlemi yapar, == ise eşitlik kontrolü yapar. Bu durumda temas.gameObject.tag="Player" ifadesi her zaman doğru dönecek çünkü "Player" değeri tag'e atanıyor, karşılaştırılmıyor.
+------------------------------
+Ball.cs scriptindeki kodda velocityY degişkeninin amacı sürekli "temas.gameObject.GetComponent>Rigidbody2D>().velocity.y" yazmamak.Eger sürekli yazarak yapmayı tercih edersen pcde oyun oynanışında takılmalar oluyor.Sürekli GetComponent kullanmak kodun performansı açısından iyi bir şey degil.
+
+ChatCpt:Unity'de GetComponent kullanımı her çagrıldıgında belirli bir maaliyetle çalışır.Çünkü unity
+,Bileşeni sahnede bulmak için arama yapar.Bu işlem özellikle çok sık tekrarlanırsa performansı olumsuz etkileyebilir.
+-Bir bileşene sık sık erimeniz gerekiyorsa,bileşeni bir degişkene atayıp bu degişkeni kullanmak daha verimlidir.
+
+Eger mantıgını daha iyi anlamak istiyorsan ilk başta Hep GetComponent yazarsın sonradan Bakarsınki sürekli aynı şeyi yazıp durmuşsun.Kodunu iyileştirirsin.
+---------------------------------
+Unityde oyunun daha hızlı başlamasını istiyorum:
+Edit>Project setting>Edıtor>Enter play mode options tikle.
+---------------------------------
+Küpe verdigim Rigidbody2D velocity 10 verdigimde küp gayet hızlı hareket ederken
+Küpün boyutunu 2 katına çıkardıgımda daha yavaş hareket edecek.Bir arabanın motorunu kamyona takarsak 
+o motor kamyonu araba gibi hızlandıramayacaktır.
+-----------------------------------
+
 
 
