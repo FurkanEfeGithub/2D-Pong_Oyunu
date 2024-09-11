@@ -44,6 +44,12 @@ bulunan mass=0 yap.
 ------
 Ball,DuvarLeft ve player arasına girerse binde birde olsa arada kalıyor.Player topa degemedigi için top duvarla player arasında kalıyor.Bunu engellemek için Duvarleft ve DuvarRight ın BoxColliderinde 
 y size=3 yap.Topun araya girmesine bir alan bırakmıyorum, izin vermiyorum.
+Player,Ball'ı Duvarda sıkıştırdıgı zaman Ball duvarın içinden geçip oyun alanının dışına çıkıyor.Bunu istemiyorum.
+ChatCpt:Topun Rigidbody2D bileşenindeki Collision Detection(Çarpışma Tespiti) seçenegini Continuous(Sürekli) olarak ayarla.
+Bu,Hızlı hareket eden nesneler için daha hassas çarpışma algılaması saglar.
+
+2)Interpolate seçenegini Interpolate olarak ayarlayarak hareketin daha düzgün,pürüssüz görünmesini saglayabilirsin.
+----------------------------------
 
 
 
