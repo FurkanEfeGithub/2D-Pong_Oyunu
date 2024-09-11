@@ -38,6 +38,12 @@ Küpe verdigim Rigidbody2D velocity 10 verdigimde küp gayet hızlı hareket ede
 Küpün boyutunu 2 katına çıkardıgımda daha yavaş hareket edecek.Bir arabanın motorunu kamyona takarsak 
 o motor kamyonu araba gibi hızlandıramayacaktır.
 -----------------------------------
+Oyun Mekanigi İyileştirmeleri:
+Ball,Playerlere üstten veya alttan çarpttıgında playeri itiyor.Bunu istemiyorum.Bu yüzden Ball'ın Rigidbody2D'de 
+bulunan mass=0 yap.
+------
+Ball,DuvarLeft ve player arasına girerse binde birde olsa arada kalıyor.Player topa degemedigi için top duvarla player arasında kalıyor.Bunu engellemek için Duvarleft ve DuvarRight ın BoxColliderinde 
+y size=3 yap.Topun araya girmesine bir alan bırakmıyorum, izin vermiyorum.
 
 
 
