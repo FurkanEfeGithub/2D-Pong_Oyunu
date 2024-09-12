@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public Transform playerLeftPosition,playerRightPosition,ballPosition;
     public static GameManager gameManager;//Ball.cs scriptinden bu scripte ulaşabilmek için.
-    void Awake()//Awake METODU,START METODUNDAN ÖNCE ÇAGRILIR.ADINI DEGİŞTİREMEZSİN.
+    void Awake()//Awake METODU,START METODUNDAN ÖNCE ÇAGRILIR.ADINI DEGİŞTİREMEZSİN.//Karmaşık Projelerde: Eğer bir oyun yöneticiniz varsa ve bu yöneticinin oyun boyunca erişilmesi gereken tek bir örneği olması gerekiyorsa, Awake() metodunu kullanarak bu referansı kurabilirsiniz. Örneğin, Singleton deseni
     {
         gameManager=this;
     }
