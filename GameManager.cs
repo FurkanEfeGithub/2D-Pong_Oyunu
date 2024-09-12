@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Transform playerLeftPosition,playerRightPosition,ballPosition;
-    public static GameManager gameManager;
+    public static GameManager gameManager;//Ball.cs scriptinden bu scripte ulaşabilmek için.
     void Awake()//Awake METODU,START METODUNDAN ÖNCE ÇAGRILIR.ADINI DEGİŞTİREMEZSİN.
     {
         gameManager=this;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         playerLeftPosition.position=new Vector3(-8,0,0);
         playerRightPosition.position=new Vector3(8,0,0);
-        ballPosition.GetComponent<Ball>().BaslangictaTopSagaGitsin();
+        ballPosition.GetComponent<Ball>().BaslangictaTopSagaGitsin();//Ball.cs scriptindeki BaslangictaTopSagaGitsin() metodu.
         ballPosition.GetComponent<Ball>().OyunYenidenBasladigindaBallPozisyonu();
     }
 }
