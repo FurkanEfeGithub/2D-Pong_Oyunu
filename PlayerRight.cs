@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// PlayerLeft2 sınıfı, bir oyuncunun hareketini kontrol eden bir MonoBehaviour sınıfıdır.
+// PlayerRight sınıfı, bir oyuncunun hareketini kontrol eden bir MonoBehaviour sınıfıdır.
 public class PlayerRight : MonoBehaviour
 {
     // Rigidbody2D bileşeni, fiziksel etkileşimler için kullanılır.
