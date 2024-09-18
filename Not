@@ -44,12 +44,26 @@ bulunan mass=0 yap.
 ------
 Ball,DuvarLeft ve player arasına girerse binde birde olsa arada kalıyor.Player topa degemedigi için top duvarla player arasında kalıyor.Bunu engellemek için Duvarleft ve DuvarRight ın BoxColliderinde 
 y size=3 yap.Topun araya girmesine bir alan bırakmıyorum, izin vermiyorum.
+-------------------------
 Player,Ball'ı Duvarda sıkıştırdıgı zaman Ball duvarın içinden geçip oyun alanının dışına çıkıyor.Bunu istemiyorum.
 ChatCpt:Topun Rigidbody2D bileşenindeki Collision Detection(Çarpışma Tespiti) seçenegini Continuous(Sürekli) olarak ayarla.
 Bu,Hızlı hareket eden nesneler için daha hassas çarpışma algılaması saglar.
 
 2)Interpolate seçenegini Interpolate olarak ayarlayarak hareketin daha düzgün,pürüssüz görünmesini saglayabilirsin.
 ----------------------------------
-
-
-
+Top,oyuncunun neresine gelirse gelsin yavaşlamıyor.Sürekli aynı hızda hareket ediyor.Başta yavaşlamasının nedeni rb=normalizeVelocity yazacagıma normalizeVelocity=rb yazmışım.O yüzden yavaşlıyormuş.
+----------------------------------
+MainMenu scene yaparken Play butonu ekledigimde Text, butonda normalde gözükmesi gerekirken gözükmüyor.
+>Sorunun çözümü butonun width=600,Height=300 
+Text'i font size 150 olursa butondaki text düzgün şekilde gözükecektir.Eger width=600,height=100 yaptıysan Text'in font size'ı 90 olursa text güzel şekilde gözükecektir.Eger font size 100 yaparsan text gözükmez.
+------------------
+Skor sisteminin fontunu dijital saatte oldugu gibi yapmak istedim.Google'a digital clock font free yazdım."1001 fonts" diye bir siteden istedigim fontu indirdim.Unitye attım.Text'in font yazan kısmına sürükleyip bıraktım.
+-------------------------------
+Oyuna arka plan sesi ekleyelim.
+Creat empty>Rename>backgroundMusic>play on wake ve loop tikle.
+bu boş objenin içine arka planda kullanacagın sesi sürükle bırak.Bunun için bir kod yazmayacagız.
+-
+Diger sesler için:
+Creat empty>Rename>soundManager>İçine Source audio componentini koy.play on awake kapat
+soundManager.cs adında script oluştur.İçine ses ile ilgili kodları yazacagım.
+Ball.cs scriptinde soundManager.cs 'nin içindeki TopSesiniOynat metoduna ulaşman için Ball.cs scriptinde soundManager degişkeni oluşturup startta bu scriptine ulaşacagız.En saglıklı yöntemi bu.
