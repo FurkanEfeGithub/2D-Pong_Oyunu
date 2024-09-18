@@ -1,31 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Collections; // Koleksiyonlar için gerekli kütüphane.
+using System.Collections.Generic; // Generic koleksiyonlar için gerekli kütüphane.
+using UnityEngine; // Unity motoru için gerekli kütüphane.
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour // GameManager2 sınıfı, MonoBehaviour'dan türetilir.
 {
-    public Transform playerLeftTransformu,playerRightTransformu,ballTransformu;
-    public static GameManager gameManager;//Ball.cs scriptinden bu scripte ulaşabilmek için.
-    void Awake()//Awake METODU,START METODUNDAN ÖNCE ÇAGRILIR.ADINI DEGİŞTİREMEZSİN.//Karmaşık Projelerde: Eğer bir oyun yöneticiniz varsa ve bu yöneticinin oyun boyunca erişilmesi gereken tek bir örneği olması gerekiyorsa, Awake() metodunu kullanarak bu referansı kurabilirsiniz. Örneğin, Singleton deseni
+    // Sol ve sağ oyuncuların ve topun Transform bileşenleri için referanslar.
+    public Transform playerLeftTransformu, playerRightTransformu, ballTransformu;
+    
+    // GameManager'nin static örneği. Diğer sınıflardan erişim için kullanılır.
+    public static GameManager gameManager;
+
+    // Awake metodu, script yüklendiğinde ilk olarak çağrılır.
+    void Awake()//Awake METODU,START METODUNDAN ÖNCE ÇAGRILIR.ADINI DEGİŞTİREMEZSİN.
     {
-        gameManager=this;
+        // gameManager2 değişkenini bu sınıfın örneğine atar.
+        gameManager2 = this;
     }
-    // Start is called before the first frame update
+
+    // Start metodu, oyun başladığında bir kez çağrılır.
     void Start()
     {
-        
+        // Başlangıçta yapılacak işlemler buraya yazılabilir.
     }
 
-    // Update is called once per frame
+    // Update metodu, her frame'de bir kez çağrılır.
     void Update()
     {
-        
+        // Frame bazında sürekli kontrol edilecek işlemler buraya yazılabilir.
     }
-    public void OyunYenidenBasladigindaPosizyonlar()
+
+    // Oyun yeniden başladığında oyuncuların ve topun pozisyonlarını ayarlayan metod.
+    public void OyunYenidenBasladigindaPozisyonlar()
     {
-        playerLeftTransformu.position=new Vector3(-8,0,0);
-        playerRightTransformu.position=new Vector3(8,0,0);
-        ballTransformu.GetComponent<Ball>().BaslangictaTopSagaGitsin();//Ball.cs scriptindeki BaslangictaTopSagaGitsin() metodu.
-        ballTransformu.GetComponent<Ball>().OyunYenidenBasladigindaBallPozisyonu();
+        // Sol oyuncunun pozisyonunu ayarla.
+        playerLeftTransformu.position = new Vector2(-8, 0);
+        
+        // Sağ oyuncunun pozisyonunu ayarla.
+        playerRightTransformu.position = new Vector2(8, 0);
+        
+        // Topun başlangıç hareketini sağla (Ball2 scriptinde tanımlı).
+        ballTransformu.GetComponent<Ball>().BaslangictaTopSagaGitsin();//Ball.cs scripti
+        
+        // Topun pozisyonunu sıfırla (Ball2 scriptinde tanımlı).
+        ballTransformu.GetComponent<Ball>().OyunYenidenBasladigindaTopunPozisyonu();
     }
 }
