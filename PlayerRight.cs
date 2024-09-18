@@ -2,46 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// PlayerLeft2 sınıfı, bir oyuncunun hareketini kontrol eden bir MonoBehaviour sınıfıdır.
 public class PlayerRight : MonoBehaviour
 {
+    // Rigidbody2D bileşeni, fiziksel etkileşimler için kullanılır.
     Rigidbody2D rb;
-    // Start is called before the first frame update
+
+    // Start metodu, oyun başladığında bir kez çağrılır.
     void Start()
     {
-        rb=GetComponent<Rigidbody2D>();
+        // Bu nesnenin Rigidbody2D bileşenini al ve rb değişkenine ata.
+        rb = GetComponent<Rigidbody2D>();
     }
-    // Update is called once per frame
+
+    // Update metodu, her frame'de bir kez çağrılır.
     void Update()
     {
-        PlayeriYukariAsagiHareketi();
+        // Kullanıcıdan gelen girişle yukarı veya aşağı hareketi kontrol et.
+        TuslarlaYukariAsagiHareket();
     }
-    void PlayeriYukariAsagiHareketi()
-    {
-        rb.velocity=new Vector2(0,
-        Input.GetAxis("VerticalPlayerRight")* 10f);
-    }
-    //--------------------KODU DAHA İYİ ANLAMAK İÇİN ÇEŞİTLİ VARYASYON METODLARIM-------------------
-    void PlayerOtoYukariHareketi()
-    {
-        rb.velocity=new Vector2(0,-5);
-    }
-    void PlayerOtoAsagiHareketi()
-    {
-        rb.velocity=new Vector2(0,5);
-    }
+
+    // Kullanıcı girişi ile yukarı veya aşağı hareketi kontrol eden metod.
     void TuslarlaYukariAsagiHareket()
     {
-        rb.velocity=new Vector2(0,
-        Input.GetAxis("Vertical")*10);
+        // rb.velocity değerini güncelle, yalnızca Y ekseninde hareket et.
+        rb.velocity = new Vector2(0, Input.GetAxis("VerticalPlayerLeft") * 10);
     }
+
+    //-------------------------------------------
+    
+    // Aşağıya hareket eden otomatik bir metod.
+    void PlayerOtoYukariHareketi()
+    {
+        // Y ekseninde yukarıya doğru sabit bir hızda hareket et.
+        rb.velocity = new Vector2(0, -5);
+    }
+
+    // Yukarıya hareket eden otomatik bir metod.
+    void PlayerOtoAsagiHareketi()
+    {
+        // Y ekseninde aşağıya doğru sabit bir hızda hareket et.
+        rb.velocity = new Vector2(0, 5);
+    }
+
+    // Kullanıcı girişi ile sola veya sağa hareketi kontrol eden metod.
     void TuslarlaSolaSagaHareket()
     {
-        rb.velocity=new Vector2(Input.GetAxis("Horizontal"),
-        0);
+        // rb.velocity değerini güncelle, yalnızca X ekseninde hareket et.
+        rb.velocity = new Vector2(Input.GetAxis("Horizontal"), 0);
     }
+
+    // Kullanıcı girişi ile yukarı, aşağı, sola veya sağa hareketi kontrol eden metod.
     void TuslarlaYukariAsagiSagaSolaHareket()
     {
-        rb.velocity=new Vector2(Input.GetAxis("Horizontal"),
-        Input.GetAxis("Vertical"));
+        // rb.velocity değerini güncelle, hem X hem de Y ekseninde hareket et.
+        rb.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 }
