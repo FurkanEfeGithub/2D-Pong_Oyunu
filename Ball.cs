@@ -2,55 +2,109 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Ball sınıfı, topun hareketini ve etkileşimlerini kontrol eden bir MonoBehaviour sınıfıdır.
 public class Ball : MonoBehaviour
 {
-    Rigidbody2D rb2D;
-    // Start is called before the first frame update
+    // Rigidbody2D bileşeni, topun fiziksel özelliklerini kontrol etmek için kullanılır.
+    Rigidbody2D rb;
+    
+    // SoundManager scriptine referans tutan değişken.//Scriptim soundManager//soundManager scriptine burdan ulaşıyorum.
+    soundManager soundManagerScript;
+
+    // Start metodu, oyun başladığında bir kez çağrılır.
     void Start()
     {
-        rb2D=GetComponent<Rigidbody2D>();// TOPUN RİGİDBODY2D BİLEŞENİNİ rb2D'YE ATADIK.
+        // Bu nesnenin Rigidbody2D bileşenini al ve rb değişkenine ata.
+        rb = GetComponent<Rigidbody2D>();
+        
+        // Oyunun başlangıcında topun sağa gitmesini sağlar.
         BaslangictaTopSagaGitsin();
-        OyunYenidenBasladigindaBallPozisyonu();
+        
+        // Oyun yeniden başladığında topun pozisyonunu sıfırlar.
+        OyunYenidenBasladigindaTopunPozisyonu();
+        
+        // SoundManager nesnesini bul ve ilgili scripti al.//Scriptimin adı soundManager.
+        soundManagerScript = GameObject.Find("soundManager").GetComponent<soundManager>();
     }
 
-    // Update is called once per frame
+    // Update metodu, her frame'de bir kez çağrılır. (Şu an kullanılmıyor)
     void Update()
     {
-        
     }
-    public void OyunYenidenBasladigindaBallPozisyonu()
-    {
-        transform.position=new Vector2(0,0);//Vector3.zero
-    }
+
+    // Başlangıçta topun sağa doğru hareket etmesini sağlayan metod.
     public void BaslangictaTopSagaGitsin()
     {
-        rb2D.velocity=new Vector2(10,0);
+        // Topun X ekseninde 10 birim/saniye hızı ile hareket etmesini sağla.
+        rb.velocity = new Vector2(10f, 0);
     }
+
+    // Oyun yeniden başladığında topun pozisyonunu sıfırlar.
+    public void OyunYenidenBasladigindaTopunPozisyonu()
+    {
+        // Topun pozisyonunu (0, 0) koordinatına ayarla.
+        transform.position = new Vector2(0, 0);
+    }
+
+    // Topun hızını sabitleyen metod.
+    void TopunHiziniSabitle()
+    {
+        //TOPUN HIZINI NORMALİZE EDİP SABİT BİR DEGERE AYARLA
+        // Topun mevcut hızını normalizeVelocity değişkenine ata.
+        Vector2 normalizeVelocity = rb.velocity;
+    
+        normalizeVelocity.Normalize();//VECTORUN AÇISINI DEGİŞTİRMEDEN UZUNLUGUNU 1 YAPAR.
+        
+        // Topun hızını sürekli 10 birim/saniye olacak şekilde ayarla.
+        normalizeVelocity *= 10;
+        
+        // Güncellenmiş hızı Rigidbody'ye ata.
+        rb.velocity = normalizeVelocity;
+    }
+
+    // Top bir nesneyle çarpıştığında çağrılan metod.
     void OnCollisionEnter2D(Collision2D temas)
-    {   
-        if(temas.gameObject.tag=="Player")
+    {
+        // Eğer çarpıştığı nesne "Player" ise
+        if (temas.gameObject.tag == "Player")
         {
-            float velocityY=temas.gameObject.GetComponent<Rigidbody2D>().velocity.y;//SÜREKLİ UZUN UZUN YAZMAMAK İÇİN velocityY 'DEGİŞKENİNE ATADIM.
-            if(velocityY!=0)//Oyuncu durmuyorsa
+            // Oyuncunun Y eksenindeki hızını al.
+            float playerinVelocitY = temas.gameObject.GetComponent<Rigidbody2D>().velocity.y;
+
+            // Eğer oyuncu durmuyorsa
+            if (playerinVelocitY != 0)
             {
-                // Topun y eksenindeki hızını Player'ın y eksenindeki hızına eşitle
-                rb2D.velocity=new Vector2(rb2D.velocity.x,velocityY);
+                // Topun Y eksenindeki hızını oyuncunun Y eksenindeki hıza eşitle.
+                rb.velocity = new Vector2(rb.velocity.x, playerinVelocitY);
             }
-            // Topun hızını normalize edip sabit bir değere ayarla
-            Vector2 yeniVelocityY=rb2D.velocity;//TOPUN MEVCUT HİZİNİ yeniVelocityY ADINDA BİR DEGİŞKENE ATA.
-            yeniVelocityY.Normalize();//VEKTORUN AÇISINI DEGİŞTİRMEDEN UZUNLUGUNU 1 YAPAR.
-            yeniVelocityY=yeniVelocityY*10;//TOPUN HIZI SÜREKLİ 10 OLACAK.
-            rb2D.velocity=yeniVelocityY;
+
+            // Topun hızını sabitle.
+            TopunHiziniSabitle();
+
+            // Ses efektini çal.
+            soundManagerScript.TopSesiniOynat();
         }
-        else if(temas.gameObject.tag=="DuvarLeft")
+
+        // Eğer çarpıştığı nesne "DuvarLeft" ise
+        if (temas.gameObject.tag == "DuvarLeft")
         {
+            // Sağ skoru artır.
             SkorManager.rightSkor++;
-            GameManager.gameManager.OyunYenidenBasladigindaPosizyonlar();
+            // Oyun yeniden başladığında pozisyonları ayarla.
+            GameManager.gameManager.OyunYenidenBasladigindaPozisyonlar();
+            // Ses efektini çal.
+            soundManagerScript.SkorSesiniOynat();
         }
-        else if(temas.gameObject.tag=="DuvarRight")
+
+        // Eğer çarpıştığı nesne "DuvarRight" ise
+        if (temas.gameObject.tag == "DuvarRight")
         {
+            // Sol skoru artır.
             SkorManager.leftSkor++;
-            GameManager.gameManager.OyunYenidenBasladigindaPosizyonlar();
+            // Oyun yeniden başladığında pozisyonları ayarla.
+            GameManager.gameManager.OyunYenidenBasladigindaPozisyonlar();
+            // Ses efektini çal.
+            soundManagerScript.SkorSesiniOynat();
         }
     }
 }
