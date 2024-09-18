@@ -43,7 +43,7 @@ public class Ball : MonoBehaviour
     public void OyunYenidenBasladigindaTopunPozisyonu()
     {
         // Topun pozisyonunu (0, 0) koordinatına ayarla.
-        transform.position = new Vector2(0, 0);
+        transform.position = new Vector2(0, 0);//Vector3.zero
     }
 
     // Topun hızını sabitleyen metod.
@@ -69,7 +69,7 @@ public class Ball : MonoBehaviour
         if (temas.gameObject.tag == "Player")
         {
             // Oyuncunun Y eksenindeki hızını al.
-            float playerinVelocitY = temas.gameObject.GetComponent<Rigidbody2D>().velocity.y;
+            float playerinVelocitY = temas.gameObject.GetComponent<Rigidbody2D>().velocity.y;//SÜREKLİ UZUN UZUN YAZMAMAK İÇİN velocityY 'DEGİŞKENİNE ATADIM.
 
             // Eğer oyuncu durmuyorsa
             if (playerinVelocitY != 0)
