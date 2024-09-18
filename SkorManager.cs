@@ -1,23 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+using System.Collections; // Koleksiyonlar için gerekli kütüphane.
+using System.Collections.Generic; // Generic koleksiyonlar için gerekli kütüphane.
+using UnityEngine; // Unity motoru için gerekli kütüphane.
+using UnityEngine.UI; // UI bileşenleri için gerekli kütüphane.
 
-public class SkorManager : MonoBehaviour
+public class SkorManager : MonoBehaviour // SkorManager sınıfı, MonoBehaviour'dan türetilir.
 {
-    public Text leftSkor_tx,rightSkor_tx;
-    public static float leftSkor,rightSkor;
-    // Start is called before the first frame update
+    // Sol ve sağ skorları göstermek için kullanılan UI metin bileşenleri.
+    public Text leftSkor_tx, rightSkor_tx;
+    
+    // Sol ve sağ skor için static değişkenler. Diğer sınıflardan erişilebilir.
+    public static float leftSkor, rightSkor;
+
+    // Start metodu, oyun başladığında bir kez çağrılır.
     void Start()
     {
-        leftSkor=0;
-        rightSkor=0;
+        // Sol ve sağ skorları başlangıçta 0 olarak ayarla.
+        leftSkor = 0;
+        rightSkor = 0;
     }
 
-    // Update is called once per frame
+    // Update metodu, her frame'de bir kez çağrılır.
     void Update()
     {
-        leftSkor_tx.text=leftSkor.ToString();
-        rightSkor_tx.text=rightSkor.ToString();
+        // Sol skoru metin bileşenine atar ve UI'da gösterir.
+        leftSkor_tx.text = leftSkor.ToString();
+        
+        // Sağ skoru metin bileşenine atar ve UI'da gösterir.
+        rightSkor_tx.text = rightSkor.ToString();
     }
 }
